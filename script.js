@@ -79,8 +79,12 @@ function route() {
   }
 
   if (path[0] === 'games') {
-    setActiveNav('genres');
-    return renderGameDetail(path[1]);
+    // 게임 상세 페이지 임시 비활성화 (사용자 요청, 2026-05-05).
+    // 복구하려면 아래 두 줄을 살리고 redirect를 제거.
+    // setActiveNav('genres');
+    // return renderGameDetail(path[1]);
+    location.hash = '#/genres';
+    return;
   }
 
   // fallback
@@ -138,8 +142,10 @@ function renderMajor() {
           const imageBlock = g.bgImage
             ? `<div class="major-wide-image" style="background-image: url('${escapeAttr(g.bgImage)}');"></div>`
             : `<div class="major-wide-image major-wide-image-empty"></div>`;
+          // 게임 상세 임시 비활성화: <a href> → <div>로 변경 (2026-05-05).
+          // 복구하려면 div를 a로, 그리고 href="#/games/..." 추가.
           return `
-            <a class="major-wide ${g.bgImage ? 'has-image' : ''}" href="#/games/${escapeAttr(g.id)}" style="${styleVars}">
+            <div class="major-wide no-link ${g.bgImage ? 'has-image' : ''}" style="${styleVars}">
               <div class="major-wide-overlay"></div>
               <div class="major-wide-inner">
                 <div class="major-wide-no">0${i + 1}</div>
@@ -161,7 +167,7 @@ function renderMajor() {
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           `;
         }).join('')}
       </div>
@@ -470,8 +476,10 @@ function renderGenreDetail(genreId) {
         : `<div class="game-grid">
             ${sortedGames.map(g => {
               const pct = Math.max(4, Math.round(((g.hours || 0) / maxHours) * 100));
+              // 게임 상세 임시 비활성화: <a href> → <div>로 변경 (2026-05-05).
+              // 복구하려면 div를 a로, 그리고 href="#/games/..." 추가.
               return `
-              <a class="game-card" href="#/games/${escapeAttr(g.id)}">
+              <div class="game-card no-link">
                 <div class="name">${escapeHtml(g.name)}</div>
                 <div class="name-en">${escapeHtml(g.nameEn || '')}</div>
                 <div class="row"><span class="k">플레이 시간</span><span class="v">${escapeHtml(g.hoursDisplay)}</span></div>
@@ -479,7 +487,7 @@ function renderGenreDetail(genreId) {
                   <div class="game-card-bar-fill" style="width: ${pct}%;"></div>
                 </div>
                 ${g.season ? `<div class="row"><span class="k">시즌</span><span class="v">${escapeHtml(g.season)}</span></div>` : ''}
-              </a>
+              </div>
             `;
             }).join('')}
           </div>`}

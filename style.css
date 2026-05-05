@@ -1268,3 +1268,28 @@ button { font: inherit; cursor: pointer; }
       );
   }
 }
+
+
+/* ================ 게임 상세 임시 비활성화 (2026-05-05) ================
+   .no-link 클래스가 붙은 카드는 클릭 효과·hover 강조 제거.
+   복구 시 script.js 라우팅 + 카드 a 태그 복원 + 이 블록 삭제. */
+.major-wide.no-link,
+.game-card.no-link {
+  cursor: default;
+}
+.major-wide.no-link:hover {
+  transform: none;
+  border-color: var(--c-border);
+  box-shadow: none;
+}
+.major-wide.no-link:hover .major-wide-image {
+  opacity: 0.55;
+  filter: drop-shadow(0 0 12px rgba(0, 255, 229, 0.18));
+  transform: none;
+}
+.game-card.no-link:hover {
+  background: var(--c-card);
+  border-color: var(--c-border);
+  transform: none;
+  box-shadow: none;
+}
