@@ -1,0 +1,12 @@
+# OS / 에디터 메타파일
+Thumbs.db
+.DS_Store
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# 임시 파일
+*.tmp
+*.bak
+~$*
