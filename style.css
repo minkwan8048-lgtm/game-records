@@ -306,6 +306,18 @@ button { font: inherit; cursor: pointer; }
   box-shadow: var(--glow-cyan-strong);
 }
 .home-btn:hover::before { opacity: 1; }
+.home-btn-icon {
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 18px;
+  filter: drop-shadow(0 0 10px rgba(200, 155, 60, 0.28));
+  transition: 0.22s ease;
+}
+.home-btn:hover .home-btn-icon {
+  filter: drop-shadow(0 0 16px rgba(232, 199, 102, 0.55));
+  transform: translateY(-2px);
+}
 .home-btn-no {
   font-family: var(--font-display);
   font-size: 12px; font-weight: 900;
@@ -460,6 +472,14 @@ button { font: inherit; cursor: pointer; }
   letter-spacing: 0.22em;
   margin-bottom: 6px;
   text-shadow: var(--glow-yellow);
+}
+.major-wide-tier-img {
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 12px rgba(232, 199, 102, 0.4));
+  object-fit: contain;
 }
 .major-wide-name {
   font-family: var(--font-kr);
@@ -1247,6 +1267,7 @@ button { font: inherit; cursor: pointer; }
   .app { padding: 36px 16px 56px; }
   .hero { padding: 40px 0 30px; }
   .home-buttons { grid-template-columns: 1fr; }
+  .home-btn-icon { width: 48px; height: 48px; margin-bottom: 14px; }
   .gd-hero { padding: 28px 22px; }
   .gd-name { font-size: 28px; }
   .section-title { font-size: 26px; }

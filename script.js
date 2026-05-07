@@ -104,12 +104,14 @@ function renderHome() {
 
       <div class="home-buttons">
         <a class="home-btn" href="#/major">
+          <img class="home-btn-icon" src="assets/icons/home_trophy.png" alt="">
           <div class="home-btn-no">01</div>
           <div class="home-btn-title">주요 기록</div>
           <div class="home-btn-sub">상위 티어 달성 게임 한눈에</div>
           <div class="home-btn-arrow">VIEW →</div>
         </a>
         <a class="home-btn" href="#/genres">
+          <img class="home-btn-icon" src="assets/icons/home_archive.png" alt="">
           <div class="home-btn-no">02</div>
           <div class="home-btn-title">게임 기록</div>
           <div class="home-btn-sub">장르별 플레이 이력 · 시간 · 게임 목록</div>
@@ -150,7 +152,9 @@ function renderMajor() {
               <div class="major-wide-inner">
                 <div class="major-wide-no">0${i + 1}</div>
                 <div class="major-wide-content">
-                  <div class="major-wide-tier">${escapeHtml(g.tierBadge || g.tier)}</div>
+                  ${g.tierBadgeImage
+                    ? `<img class="major-wide-tier-img" src="${escapeAttr(g.tierBadgeImage)}" alt="${escapeAttr(g.tierBadge || g.tier)}">`
+                    : `<div class="major-wide-tier">${escapeHtml(g.tierBadge || g.tier)}</div>`}
                   <h3 class="major-wide-name">${escapeHtml(g.name)}</h3>
                   <div class="major-wide-name-en">${escapeHtml(g.nameEn || '')}</div>
                   <p class="major-wide-desc">${escapeHtml(g.shortDesc || '(짧은 설명 작성 예정)')}</p>
