@@ -152,9 +152,7 @@ function renderMajor() {
               <div class="major-wide-inner">
                 <div class="major-wide-no">0${i + 1}</div>
                 <div class="major-wide-content">
-                  ${g.tierBadgeImage
-                    ? `<img class="major-wide-tier-img" src="${escapeAttr(g.tierBadgeImage)}" alt="${escapeAttr(g.tierBadge || g.tier)}">`
-                    : `<div class="major-wide-tier">${escapeHtml(g.tierBadge || g.tier)}</div>`}
+                  <div class="major-wide-tier">${escapeHtml(g.tierBadge || g.tier)}</div>
                   <h3 class="major-wide-name">${escapeHtml(g.name)}</h3>
                   <div class="major-wide-name-en">${escapeHtml(g.nameEn || '')}</div>
                   <p class="major-wide-desc">${escapeHtml(g.shortDesc || '(짧은 설명 작성 예정)')}</p>

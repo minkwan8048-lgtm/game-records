@@ -473,14 +473,6 @@ button { font: inherit; cursor: pointer; }
   margin-bottom: 6px;
   text-shadow: var(--glow-yellow);
 }
-.major-wide-tier-img {
-  display: block;
-  width: 56px;
-  height: 56px;
-  margin-bottom: 8px;
-  filter: drop-shadow(0 0 12px rgba(232, 199, 102, 0.4));
-  object-fit: contain;
-}
 .major-wide-name {
   font-family: var(--font-kr);
   font-size: 22px; font-weight: 900;

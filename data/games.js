@@ -25,7 +25,7 @@ window.GAMES_DATA = {
     },
     {
       "id": "rpg",
-      "name": "RPG · MMO",
+      "name": "MMORPG",
       "description": "캐릭터 성장 · 세계관"
     },
     {
@@ -40,8 +40,8 @@ window.GAMES_DATA = {
     },
     {
       "id": "strategy",
-      "name": "전략 · 오토배틀러",
-      "description": "실시간 · 턴제 · 오토배틀러"
+      "name": "전략",
+      "description": "실시간 · 턴제"
     },
     {
       "id": "simulation",
@@ -107,11 +107,10 @@ window.GAMES_DATA = {
       "hoursDisplay": "5,000+ 시간",
       "tier": "마스터",
       "tierBadge": "MASTER",
-      "tierBadgeImage": "assets/icons/overwatch_master.png",
       "season": "",
       "position": "",
       "shortDesc": "역할 카운터·영웅 스왑이 매 순간 작동 — 시스템 간 유기적 연결의 실시간 사례",
-      "bgImage": "",
+      "bgImage": "assets/icons/overwatch_master.png",
       "bgGradient": [
         "#C66D1B",
         "#1A2A3A"
@@ -150,11 +149,10 @@ window.GAMES_DATA = {
       "hoursDisplay": "3,000+ 시간",
       "tier": "시즌1 IN 500",
       "tierBadge": "SEASON 1 · TOP 500",
-      "tierBadgeImage": "assets/icons/pubg_top500.png",
       "season": "시즌 1",
       "position": "",
       "shortDesc": "시야·자원·시간 압박이 동시에 작동하는 서바이벌 — 즉발적 의사결정의 무게를 학습",
-      "bgImage": "",
+      "bgImage": "assets/icons/pubg_top500.png",
       "bgGradient": [
         "#B07A0E",
         "#1F1F1F"
@@ -244,11 +242,10 @@ window.GAMES_DATA = {
       "hoursDisplay": "1,000+ 시간",
       "tier": "초월자",
       "tierBadge": "ASCENDANT",
-      "tierBadgeImage": "assets/icons/valorant_ascendant.png",
       "season": "",
       "position": "",
       "shortDesc": "각 역할군에 따른 전투 설계 — 역할군의 부재에서 오는 전략의 엇갈림을 학습한 전술 슈터",
-      "bgImage": "",
+      "bgImage": "assets/icons/valorant_ascendant.png",
       "bgGradient": [
         "#BD3944",
         "#0F1923"
@@ -531,7 +528,7 @@ window.GAMES_DATA = {
       "id": "baldurs-gate-3",
       "name": "발더스 게이트 3",
       "nameEn": "Baldur's Gate 3",
-      "genre": "rpg",
+      "genre": "strategy",
       "hours": 100,
       "hoursDisplay": "100시간",
       "tier": "",
@@ -567,7 +564,7 @@ window.GAMES_DATA = {
       "id": "cyberpunk-2077",
       "name": "사이버펑크 2077",
       "nameEn": "Cyberpunk 2077",
-      "genre": "rpg",
+      "genre": "action-adventure",
       "hours": 100,
       "hoursDisplay": "100시간",
       "tier": "",
@@ -729,7 +726,7 @@ window.GAMES_DATA = {
       "id": "among-us",
       "name": "어몽 어스",
       "nameEn": "Among Us",
-      "genre": "etc",
+      "genre": "simulation",
       "hours": 50,
       "hoursDisplay": "50시간",
       "tier": "",
@@ -999,7 +996,7 @@ window.GAMES_DATA = {
       "id": "kingdom-come-deliverance",
       "name": "킹덤 컴: 딜리버런스",
       "nameEn": "Kingdom Come: Deliverance",
-      "genre": "rpg",
+      "genre": "action-adventure",
       "hours": 20,
       "hoursDisplay": "20시간",
       "tier": "",
