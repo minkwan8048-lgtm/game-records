@@ -13,26 +13,74 @@
     gtag('js', new Date());
     gtag('config', 'G-TPWCKYPTX7');
   </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Pretendard:wght@400;500;700;800;900&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Audiowide&family=Press+Start+2P&family=VT323&family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="logo" href="#/">
+
+  <header class="topbar" id="topbar">
+    <a class="logo" href="#top">
       <span class="logo-en">GAME RECORDS</span>
       <span class="logo-kr">서민관</span>
     </a>
-    <nav class="topnav" id="topnav"></nav>
+    <nav class="topnav">
+      <a href="#major">주요 기록</a>
+      <a href="#genres">장르 분포</a>
+      <a href="#library">전체 기록</a>
+    </nav>
   </header>
 
-  <main id="app" class="app"></main>
+  <main id="top">
+
+    <!-- 히어로: 소개 + 핵심 지표 -->
+    <section class="hero">
+      <p class="hero-eyebrow">GAME RECORDS · 서민관</p>
+      <h1 class="hero-title">게임으로 쌓아온<br>시간의 기록</h1>
+      <p class="hero-sub">
+        장르를 가리지 않고 깊게 플레이하며 시스템을 몸으로 익혀 왔습니다.<br>
+        아래 기록은 전부 직접 플레이한 시간입니다.
+      </p>
+      <div class="kpi-row" id="kpi-row"></div>
+    </section>
+
+    <!-- 주요 기록: 티어 달성 5종 -->
+    <section class="section" id="major">
+      <div class="section-head">
+        <h2 class="section-title">주요 기록</h2>
+        <p class="section-desc">경쟁 콘텐츠에서 상위 티어까지 도달한 게임들</p>
+      </div>
+      <div class="major-grid" id="major-grid"></div>
+    </section>
+
+    <!-- 장르 분포 -->
+    <section class="section" id="genres">
+      <div class="section-head">
+        <h2 class="section-title">장르 분포</h2>
+        <p class="section-desc">장르별 누적 플레이 시간 — 막대를 누르면 해당 장르 기록으로 이동합니다</p>
+      </div>
+      <div class="genre-chart" id="genre-chart" role="img" aria-label="장르별 누적 플레이 시간 막대 그래프"></div>
+    </section>
+
+    <!-- 전체 기록 -->
+    <section class="section" id="library">
+      <div class="section-head">
+        <h2 class="section-title">전체 기록</h2>
+        <p class="section-desc">플레이 시간 순 전체 목록</p>
+      </div>
+      <div class="chip-row" id="chip-row"></div>
+      <ol class="game-list" id="game-list"></ol>
+    </section>
+
+  </main>
 
   <footer class="footer">
     <div class="footer-inner">
       <span id="footer-name">서민관 · 전투·던전 시스템 기획</span>
-      <span id="footer-email">minkwan8048@gmail.com</span>
+      <span id="footer-email"></span>
       <span id="footer-updated"></span>
     </div>
   </footer>
