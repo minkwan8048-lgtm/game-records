@@ -1,26 +1,26 @@
 /* =========================================================
-   Game Records — Gaming Tone
-   네온 글로우 · 각진 베벨 · HUD 코너 마커 · futuristic 폰트
+   Game Records — Cosmic Black Hole
+   심우주 보라 · 호박색 강조 · 신비로운 블랙홀 분위기
    ========================================================= */
 :root {
-  /* THEME D — Gold Trophy (Master Honor) */
-  --c-bg-deep:   #07101C;
-  --c-bg:        #0D1B2A;
-  --c-bg-2:      #14253A;
-  --c-card:      #1A2D44;
-  --c-card-2:    #213B57;
-  --c-border:    #345274;
-  --c-text:      #F0E8D0;
-  --c-text-soft: #C8B888;
-  --c-dim:       #7A8AA0;
-  --c-cyan:      #C89B3C;       /* GOLD (primary accent) */
-  --c-cyan-2:    #E8C766;       /* GOLD bright */
-  --c-magenta:   #8B2C30;       /* WINE */
-  --c-magenta-2: #B5414A;
-  --c-yellow:    #E8C766;       /* GOLD bright */
-  --c-purple:    #7E5BAE;
-  --c-red:       #8B2C30;
-  --c-green:     #6B9D6B;
+  /* THEME F — Cosmic Black Hole (Deep Violet + Amber Accent) */
+  --c-bg-deep:   #060010;
+  --c-bg:        #0c0418;
+  --c-bg-2:      #150827;
+  --c-card:      #1d0e3a;
+  --c-card-2:    #29155a;
+  --c-border:    #5a3796;
+  --c-text:      #ECE0FF;
+  --c-text-soft: #B59FE0;
+  --c-dim:       #6e5398;
+  --c-cyan:      #B591F0;       /* VIOLET (primary accent) */
+  --c-cyan-2:    #DCC4FF;       /* VIOLET bright */
+  --c-magenta:   #FF9D4A;       /* AMBER (special accent) */
+  --c-magenta-2: #FFB873;
+  --c-yellow:    #FFCC80;       /* AMBER bright */
+  --c-purple:    #9D6FE0;
+  --c-red:       #FF6E6E;
+  --c-green:     #8AC990;
 
   --r-sm: 2px;
   --r-md: 4px;
@@ -30,10 +30,10 @@
   --font-en:      'Cormorant Garamond', 'Inter', serif;
   --font-kr:      'Pretendard', sans-serif;
 
-  --glow-cyan:    0 0 14px rgba(200, 155, 60, 0.45), 0 0 32px rgba(200, 155, 60, 0.18);
-  --glow-cyan-strong: 0 0 22px rgba(232, 199, 102, 0.7), 0 0 50px rgba(200, 155, 60, 0.3);
-  --glow-yellow:  0 0 16px rgba(232, 199, 102, 0.6);
-  --glow-magenta: 0 0 12px rgba(139, 44, 48, 0.5);
+  --glow-cyan:    0 0 14px rgba(181, 145, 240, 0.5), 0 0 32px rgba(181, 145, 240, 0.22);
+  --glow-cyan-strong: 0 0 22px rgba(220, 196, 255, 0.75), 0 0 50px rgba(181, 145, 240, 0.32);
+  --glow-yellow:  0 0 16px rgba(255, 184, 115, 0.65);
+  --glow-magenta: 0 0 14px rgba(255, 157, 74, 0.55);
 
   /* Trophy: 모서리 살짝 깎인 우아한 베벨 */
   --bevel: polygon(
@@ -56,13 +56,13 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ================ Background (Gold Trophy — solemn warm) ================ */
+/* ================ Background (Cosmic — deep violet space + amber spark) ================ */
 body::before {
   content: '';
   position: fixed; inset: 0;
   background:
-    radial-gradient(circle at 1px 1px, rgba(200, 155, 60, 0.04) 1px, transparent 0);
-  background-size: 30px 30px;
+    radial-gradient(circle at 1px 1px, rgba(181, 145, 240, 0.05) 1px, transparent 0);
+  background-size: 28px 28px;
   pointer-events: none;
   z-index: 0;
 }
@@ -70,8 +70,10 @@ body::after {
   content: '';
   position: fixed; inset: 0;
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(200, 155, 60, 0.1), transparent 55%),
-    radial-gradient(ellipse at 50% 100%, rgba(139, 44, 48, 0.06), transparent 60%);
+    radial-gradient(ellipse at 50% -10%, rgba(157, 111, 224, 0.12), transparent 55%),
+    radial-gradient(ellipse at 50% 110%, rgba(255, 157, 74, 0.06), transparent 55%),
+    radial-gradient(ellipse at 0% 40%, rgba(91, 44, 122, 0.08), transparent 45%),
+    radial-gradient(ellipse at 100% 60%, rgba(157, 111, 224, 0.06), transparent 45%);
   pointer-events: none;
   z-index: 0;
 }
@@ -85,7 +87,7 @@ button { font: inherit; cursor: pointer; }
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
   padding: 16px 32px;
-  background: rgba(5, 8, 16, 0.85);
+  background: rgba(6, 0, 16, 0.88);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--c-border);
 }
@@ -239,11 +241,11 @@ button { font: inherit; cursor: pointer; }
   line-height: 1.1;
   margin: 0 0 20px;
   letter-spacing: 0.06em;
-  background: linear-gradient(180deg, #F4DC9C 0%, var(--c-cyan-2) 30%, var(--c-cyan) 70%, #8B6915 100%);
+  background: linear-gradient(180deg, #ECE0FF 0%, var(--c-cyan-2) 30%, var(--c-cyan) 70%, #5B2C7A 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 8px rgba(200, 155, 60, 0.4));
+  filter: drop-shadow(0 2px 8px rgba(181, 145, 240, 0.4));
   text-transform: uppercase;
 }
 .hero-title::before {
@@ -272,6 +274,34 @@ button { font: inherit; cursor: pointer; }
   color: var(--c-text-soft);
   letter-spacing: 0.05em;
   margin-bottom: 60px;
+}
+
+/* ── 홈 페이지 풀 백그라운드 (천문도 GIF) ── */
+.home-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.home-bg-img {
+  width: min(110vh, 1100px);
+  height: min(110vh, 1100px);
+  max-width: 110vw;
+  object-fit: cover;
+  opacity: 0.55;
+  filter: drop-shadow(0 0 80px rgba(157, 111, 224, 0.4))
+          drop-shadow(0 0 30px rgba(255, 157, 74, 0.18));
+}
+.home-bg::before {
+  /* 가장자리 페이드 — 배경이 콘텐츠 가독성 해치지 않도록 */
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, var(--c-bg-deep) 90%);
+  pointer-events: none;
 }
 
 .home-buttons {
@@ -311,11 +341,11 @@ button { font: inherit; cursor: pointer; }
   width: 56px;
   height: 56px;
   margin-bottom: 18px;
-  filter: drop-shadow(0 0 10px rgba(200, 155, 60, 0.28));
+  filter: drop-shadow(0 0 10px rgba(181, 145, 240, 0.28));
   transition: 0.22s ease;
 }
 .home-btn:hover .home-btn-icon {
-  filter: drop-shadow(0 0 16px rgba(232, 199, 102, 0.55));
+  filter: drop-shadow(0 0 16px rgba(220, 196, 255, 0.55));
   transform: translateY(-2px);
 }
 .home-btn-no {
@@ -478,7 +508,7 @@ button { font: inherit; cursor: pointer; }
   font-size: 22px; font-weight: 900;
   margin: 0 0 2px;
   color: var(--c-cyan-2);
-  text-shadow: 0 2px 8px rgba(200, 155, 60, 0.3);
+  text-shadow: 0 2px 8px rgba(181, 145, 240, 0.3);
 }
 .major-wide-name-en {
   font-family: var(--font-display);
@@ -587,11 +617,11 @@ button { font: inherit; cursor: pointer; }
   font-weight: 900;
   letter-spacing: 0.02em;
   line-height: 1;
-  background: linear-gradient(180deg, #F4DC9C 0%, var(--c-cyan-2) 35%, var(--c-cyan) 75%, #8B6915 100%);
+  background: linear-gradient(180deg, #ECE0FF 0%, var(--c-cyan-2) 35%, var(--c-cyan) 75%, #5B2C7A 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 8px rgba(200, 155, 60, 0.35));
+  filter: drop-shadow(0 2px 8px rgba(181, 145, 240, 0.35));
 }
 .stats-hero-num .plus {
   color: var(--c-cyan);
@@ -678,11 +708,11 @@ button { font: inherit; cursor: pointer; }
   font-weight: 900;
   letter-spacing: 0.02em;
   line-height: 1;
-  background: linear-gradient(180deg, #F4DC9C 0%, var(--c-cyan-2) 35%, var(--c-cyan) 75%, #8B6915 100%);
+  background: linear-gradient(180deg, #ECE0FF 0%, var(--c-cyan-2) 35%, var(--c-cyan) 75%, #5B2C7A 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 8px rgba(200, 155, 60, 0.3));
+  filter: drop-shadow(0 2px 8px rgba(181, 145, 240, 0.3));
 }
 .ov-stat-num .plus {
   color: var(--c-cyan);
@@ -712,11 +742,164 @@ button { font: inherit; cursor: pointer; }
 }
 .ov-donut-wrap {
   position: relative;
-  width: 420px; height: 350px;
+  width: 620px; height: 620px;
+}
+
+/* ── Overview 카드 그리드 (별자리 대체) ── */
+.ov-cards-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 620px;
+}
+.ov-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  width: 100%;
+}
+.ov-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, var(--c-card) 0%, var(--c-card-2) 100%);
+  border: 1px solid var(--c-border);
+  border-left: 3px solid var(--card-color, var(--c-cyan));
+  clip-path: var(--bevel);
+  text-decoration: none;
+  color: inherit;
+  transition: 0.22s ease;
+  cursor: pointer;
+}
+.ov-card:hover,
+.ov-card.is-active {
+  border-color: var(--card-color, var(--c-cyan));
+  border-left-width: 5px;
+  transform: translateY(-3px);
+  box-shadow: 0 0 18px rgba(181, 145, 240, 0.3);
+}
+.ov-card.is-dim { opacity: 0.32; }
+.ov-card-name {
+  font-family: var(--font-kr);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--c-cyan-2);
+  letter-spacing: 0.01em;
+}
+.ov-card-hours {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--card-color, var(--c-cyan));
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.ov-card-h {
+  font-size: 12px;
+  margin-left: 2px;
+  color: var(--c-text-soft);
+  font-weight: 700;
+}
+.ov-card-pct {
+  font-family: var(--font-en);
+  font-size: 12px;
+  color: var(--c-text-soft);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.ov-card-bar {
+  height: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.ov-card-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--card-color, var(--c-cyan)), var(--c-cyan-2));
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+/* ── Constellation 별자리 차트 ── */
+.cnst-dust { pointer-events: none; }
+.cnst-lines { pointer-events: none; }
+
+.cnst-star {
+  cursor: pointer;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+  filter: drop-shadow(0 0 6px currentColor);
+}
+.cnst-star .cnst-halo  { transition: opacity 0.25s ease, r 0.25s ease; }
+.cnst-star .cnst-core  { transition: opacity 0.25s ease; }
+.cnst-star .cnst-flare { transition: opacity 0.25s ease; }
+
+.cnst-star:hover,
+.cnst-star.is-active {
+  filter: drop-shadow(0 0 14px currentColor) drop-shadow(0 0 28px currentColor);
+}
+.cnst-star:hover .cnst-halo,
+.cnst-star.is-active .cnst-halo {
+  opacity: 0.45;
+}
+.cnst-star.is-dim {
+  opacity: 0.2;
+  filter: none;
+}
+
+/* 별자리 선 — hover한 별의 모든 연결 강조 (현재는 단순 dim 처리만) */
+.cnst-line { transition: opacity 0.25s ease; }
+
+/* ── 별 트윙클 (은은하게, 별마다 다른 박자) ── */
+@keyframes cnst-flare-twinkle {
+  0%, 100% { opacity: 1.0; }
+  50%      { opacity: 0.35; }
+}
+@keyframes cnst-halo-breath {
+  0%, 100% { opacity: 0.18; }
+  50%      { opacity: 0.30; }
+}
+@keyframes cnst-core-shimmer {
+  0%, 100% { opacity: 0.92; }
+  50%      { opacity: 0.78; }
+}
+
+.cnst-flare {
+  animation: cnst-flare-twinkle 3.4s ease-in-out infinite;
+}
+.cnst-halo {
+  animation: cnst-halo-breath 4.6s ease-in-out infinite;
+}
+.cnst-core {
+  animation: cnst-core-shimmer 5.2s ease-in-out infinite;
+}
+
+/* 별마다 다른 박자 — 진짜 별처럼 무작위로 반짝 */
+.cnst-stars > g:nth-child(2n) .cnst-flare { animation-delay: 0.7s; animation-duration: 4.1s; }
+.cnst-stars > g:nth-child(3n) .cnst-flare { animation-delay: 1.5s; animation-duration: 5.3s; }
+.cnst-stars > g:nth-child(5n) .cnst-flare { animation-delay: 2.2s; animation-duration: 3.8s; }
+.cnst-stars > g:nth-child(7n) .cnst-flare { animation-delay: 0.3s; animation-duration: 4.7s; }
+
+.cnst-stars > g:nth-child(2n) .cnst-halo { animation-delay: 1.2s; animation-duration: 5.5s; }
+.cnst-stars > g:nth-child(3n) .cnst-halo { animation-delay: 2.4s; animation-duration: 6.2s; }
+.cnst-stars > g:nth-child(5n) .cnst-halo { animation-delay: 3.1s; animation-duration: 4.8s; }
+
+.cnst-stars > g:nth-child(2n) .cnst-core { animation-delay: 0.9s; animation-duration: 6.0s; }
+.cnst-stars > g:nth-child(3n) .cnst-core { animation-delay: 2.7s; animation-duration: 5.7s; }
+.cnst-stars > g:nth-child(5n) .cnst-core { animation-delay: 1.8s; animation-duration: 4.9s; }
+
+/* 호버 시엔 트윙클 멈추고 활성 상태 유지 */
+.cnst-star:hover .cnst-flare,
+.cnst-star.is-active .cnst-flare,
+.cnst-star:hover .cnst-halo,
+.cnst-star.is-active .cnst-halo,
+.cnst-star:hover .cnst-core,
+.cnst-star.is-active .cnst-core {
+  animation-play-state: paused;
 }
 .ov-donut-svg {
   width: 100%; height: 100%;
-  filter: drop-shadow(0 4px 22px rgba(200, 155, 60, 0.3));
+  filter: drop-shadow(0 4px 22px rgba(181, 145, 240, 0.3));
   overflow: visible;
 }
 .ov-donut-seg {
@@ -804,12 +987,12 @@ button { font: inherit; cursor: pointer; }
   font-size: 56px;
   font-weight: 900;
   letter-spacing: 0.02em;
-  background: linear-gradient(180deg, #F4DC9C 0%, var(--c-cyan-2) 35%, var(--c-cyan) 75%, #8B6915 100%);
+  background: linear-gradient(180deg, #ECE0FF 0%, var(--c-cyan-2) 35%, var(--c-cyan) 75%, #5B2C7A 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1;
-  filter: drop-shadow(0 2px 8px rgba(200, 155, 60, 0.35));
+  filter: drop-shadow(0 2px 8px rgba(181, 145, 240, 0.35));
 }
 .ov-donut-center-num .plus {
   -webkit-text-fill-color: var(--c-cyan);
@@ -859,7 +1042,7 @@ button { font: inherit; cursor: pointer; }
   .ov-stat { text-align: center; width: 100%; }
   .ov-stat-num { font-size: 32px; }
   .ov-right { margin-right: 0; }
-  .ov-donut-wrap { width: 320px; height: 270px; }
+  .ov-donut-wrap { width: 340px; height: 340px; }
   .ov-donut-center { width: 110px; height: 110px; }
   .ov-donut-center-num { font-size: 40px; }
 }
@@ -899,11 +1082,11 @@ button { font: inherit; cursor: pointer; }
 /* 도넛 hover 시 동기화 */
 .genre-wide.is-highlighted {
   border-color: var(--c-cyan);
-  box-shadow: 0 0 22px rgba(200, 155, 60, 0.5), 0 0 50px rgba(232, 199, 102, 0.18);
+  box-shadow: 0 0 22px rgba(181, 145, 240, 0.5), 0 0 50px rgba(220, 196, 255, 0.18);
   transform: translateY(-2px);
   background: linear-gradient(135deg, var(--c-card-2) 0%, var(--c-card) 100%);
 }
-.genre-wide.is-highlighted .genre-wide-name { color: var(--c-cyan-2); text-shadow: 0 0 12px rgba(232, 199, 102, 0.4); }
+.genre-wide.is-highlighted .genre-wide-name { color: var(--c-cyan-2); text-shadow: 0 0 12px rgba(220, 196, 255, 0.4); }
 .genre-wide-no {
   font-family: var(--font-display);
   font-size: 32px; font-weight: 900;
@@ -964,8 +1147,8 @@ button { font: inherit; cursor: pointer; }
 }
 .genre-wide-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #8B6915 0%, var(--c-cyan) 50%, var(--c-cyan-2) 100%);
-  box-shadow: 0 0 14px rgba(200, 155, 60, 0.5);
+  background: linear-gradient(90deg, #5B2C7A 0%, var(--c-cyan) 50%, var(--c-cyan-2) 100%);
+  box-shadow: 0 0 14px rgba(181, 145, 240, 0.5);
   transition: width 0.6s ease;
 }
 /* Mobile genre-wide */
@@ -1117,8 +1300,8 @@ button { font: inherit; cursor: pointer; }
 }
 .game-card-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #8B6915 0%, var(--c-cyan) 60%, var(--c-cyan-2) 100%);
-  box-shadow: 0 0 10px rgba(200, 155, 60, 0.45);
+  background: linear-gradient(90deg, #5B2C7A 0%, var(--c-cyan) 60%, var(--c-cyan-2) 100%);
+  box-shadow: 0 0 10px rgba(181, 145, 240, 0.45);
   transition: width 0.6s ease;
 }
 

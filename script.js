@@ -197,39 +197,6 @@ function renderGenresHub() {
       <h2 class="section-title">장르별 게임 기록</h2>
 
       ${renderOverviewCard(sortedGenres, stats)}
-
-      <p style="color: var(--c-dim); margin: 0 0 24px; font-size: 13px;">
-        장르를 선택하면 해당 게임 목록을 확인할 수 있습니다.
-      </p>
-
-      <div class="genre-stack">
-        ${sortedGenres.map((genre, i) => {
-          const s = stats.byGenre[genre.id] || { count: 0, hours: 0 };
-          const isEmpty = s.count === 0;
-          const pct = isEmpty ? 0 : Math.max(4, Math.round((s.hours / maxHours) * 100));
-          const tag = isEmpty ? 'div' : 'a';
-          const href = isEmpty ? '' : ` href="#/genres/${escapeAttr(genre.id)}"`;
-          return `
-            <${tag} class="genre-wide ${isEmpty ? 'empty' : ''}" data-genre-id="${escapeAttr(genre.id)}"${href}>
-              <div class="genre-wide-no">0${i + 1}</div>
-              <div class="genre-wide-content">
-                <div class="genre-wide-head">
-                  <h3 class="genre-wide-name">${escapeHtml(genre.name)}</h3>
-                  <div class="genre-wide-stats">
-                    <span class="games">${s.count}게임</span>
-                    <span class="dot">·</span>
-                    <span class="hours">${formatHours(s.hours)}</span>
-                  </div>
-                </div>
-                <div class="genre-wide-desc">${escapeHtml(genre.description)}</div>
-                <div class="genre-wide-bar">
-                  <div class="genre-wide-bar-fill" style="width: ${pct}%;"></div>
-                </div>
-              </div>
-            </${tag}>
-          `;
-        }).join('')}
-      </div>
     </section>
   `;
 }
@@ -262,91 +229,186 @@ function describeArc(cx, cy, rOuter, rInner, startAngle, endAngle) {
 }
 
 function renderOverviewCard(sortedGenres, stats) {
-  // 활성 장르(시간 > 0)만 도넛에 시간 비율로 표시. 비활성은 가운데 라벨로.
+  // 활성 장르(시간 > 0)만 표시
   const filled = sortedGenres
     .filter(g => (stats.byGenre[g.id] || { hours: 0 }).hours > 0)
     .map(g => ({
       id: g.id,
       name: g.name,
       hours: stats.byGenre[g.id].hours,
+      count: stats.byGenre[g.id].count,
       pct: (stats.byGenre[g.id].hours / stats.totalHours) * 100
     }));
 
-  // SVG 도넛 segments — 시간 비율 분할
-  const cx = 0, cy = 0;
-  const rOuter = 110, rInner = 66;
-  let segPaths = '';
-  let cumAngle = 0;
+  return renderCardGridOverview(filled, stats);
+}
 
-  let labelEls = '';
-  filled.forEach((g, i) => {
-    const startAngle = cumAngle;
-    const endAngle = cumAngle + (g.pct / 100) * 360;
-    cumAngle = endAngle;
+function renderCardGridOverview(filled, stats) {
+  // 시간 순 정렬 — 큰 장르가 상단/좌측
+  const sorted = [...filled].sort((a, b) => b.hours - a.hours);
+  const maxHours = Math.max(...sorted.map(g => g.hours), 1);
 
-    const color = DONUT_PALETTE[i % DONUT_PALETTE.length];
-    const d = describeArc(cx, cy, rOuter, rInner, startAngle, endAngle);
+  let cards = '';
+  sorted.forEach((g, i) => {
+    const color = DONUT_PALETTE[filled.indexOf(g) % DONUT_PALETTE.length];
     const safeId = escapeAttr(g.id);
+    const pctBar = Math.max(4, (g.hours / maxHours) * 100);
 
-    segPaths += `<path
-      class="ov-donut-seg"
-      d="${d}"
-      fill="${color}"
-      data-genre-id="${safeId}"
-      data-name="${escapeAttr(g.name)}"
-      data-hours="${g.hours}"
-      data-pct="${g.pct.toFixed(1)}"
-      data-active="1"
-      data-color="${color}"
-    />`;
+    cards += `
+      <a class="ov-card ov-donut-seg"
+         href="#/genres/${safeId}"
+         data-genre-id="${safeId}"
+         data-name="${escapeAttr(g.name)}"
+         data-hours="${g.hours}"
+         data-pct="${g.pct.toFixed(1)}"
+         data-color="${color}"
+         style="--card-color: ${color};">
+        <div class="ov-card-name">${escapeHtml(g.name)}</div>
+        <div class="ov-card-hours">${g.hours.toLocaleString()}<span class="ov-card-h">h</span></div>
+        <div class="ov-card-pct">${g.pct.toFixed(1)}%</div>
+        <div class="ov-card-bar"><div class="ov-card-bar-fill" style="width: ${pctBar}%;"></div></div>
+      </a>
+    `;
+  });
 
-    // Leader line + 라벨
-    const midAngle  = (startAngle + endAngle) / 2;
-    const segEdge   = polarToCartesian(cx, cy, rOuter + 1, midAngle);
-    const isRight   = midAngle < 180;
-    const isUpper   = midAngle < 90 || midAngle > 270;
+  return `
+    <div class="overview-card">
+      <div class="ov-left">
+        <div class="ov-stat">
+          <div class="ov-stat-num">${stats.totalGames}</div>
+          <div class="ov-stat-label">TOTAL GAMES</div>
+        </div>
+        <div class="ov-stat-hr"></div>
+        <div class="ov-stat">
+          <div class="ov-stat-num">${stats.totalHours.toLocaleString()}<span class="plus">+</span></div>
+          <div class="ov-stat-label">PLAY HOURS</div>
+        </div>
+      </div>
+      <div class="ov-right ov-cards-wrap">
+        <div class="ov-cards-grid">
+          ${cards}
+        </div>
+      </div>
+    </div>
+  `;
+}
 
-    // elbow: segment edge에서 외부 + 위/아래 offset → 항상 60° 가까운 꺾임 보장
-    const elbowOffsetX = 18;
-    const elbowOffsetY = 22;
-    const elbow = {
-      x: segEdge.x + (isRight ? elbowOffsetX : -elbowOffsetX),
-      y: segEdge.y + (isUpper ? -elbowOffsetY : elbowOffsetY)
-    };
+function renderConstellationOverview(filled, stats) {
+  const N = filled.length;
 
-    const labelEndX = isRight ? elbow.x + 38 : elbow.x - 38;
-    const labelY    = elbow.y;
-    const anchor    = isRight ? 'start' : 'end';
-    const underlineY = labelY + 14;
-    const underlineStartX = isRight ? labelEndX + 4 : labelEndX - 4;
-    const underlineEndX   = isRight ? labelEndX + 28 : labelEndX - 28;
+  // Phase 1 — 별 위치: Poisson disc 샘플링으로 별자리스러운 자연 분포
+  // 태양 바깥(>SUN_CLEAR), viewBox 안쪽(<MAX_R), 별 사이 최소 거리(MIN_DIST) 보장
+  const SUN_CLEAR = 145;     // 태양 + 코로나 회피
+  const MAX_R     = 285;     // viewBox 가장자리 안쪽
+  const MIN_DIST  = 92;      // 별끼리 최소 간격
+  const sortedByHours = [...filled].sort((a, b) => b.hours - a.hours);
 
-    // 직선 두 개 (segEdge → elbow → labelEnd) — linejoin/linecap round로 부드러운 꺾임
-    const linePath = [
-      `M ${segEdge.x.toFixed(2)} ${segEdge.y.toFixed(2)}`,
-      `L ${elbow.x.toFixed(2)} ${elbow.y.toFixed(2)}`,
-      `L ${labelEndX.toFixed(2)} ${labelY.toFixed(2)}`
-    ].join(' ');
+  // 시드된 PRNG — 매번 같은 별자리 패턴 보장
+  let seed = 0x9E3779B9;
+  const rand = () => {
+    seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), seed | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 
-    labelEls += `
-      <g class="ov-donut-label" data-genre-id="${safeId}">
-        <path class="dl-line" d="${linePath}"
-              fill="none" stroke="${color}" stroke-width="1.2"
-              stroke-linecap="round" stroke-linejoin="round"
-              opacity="0.6" />
-        <circle class="dl-dot" cx="${segEdge.x.toFixed(2)}" cy="${segEdge.y.toFixed(2)}"
-                r="2.4" fill="${color}" />
-        <line class="dl-underline" x1="${underlineStartX.toFixed(2)}" y1="${underlineY}"
-              x2="${underlineEndX.toFixed(2)}" y2="${underlineY}"
-              stroke="${color}" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
-        <text x="${labelEndX + (isRight ? 3 : -3)}" y="${labelY - 2}"
-              text-anchor="${anchor}" class="donut-label-name">${escapeHtml(g.name)}</text>
-        <text x="${labelEndX + (isRight ? 3 : -3)}" y="${labelY + 12}"
-              text-anchor="${anchor}" class="donut-label-pct">${g.pct.toFixed(1)}%</text>
+  const positions = [];
+  let attempts = 0;
+  while (positions.length < sortedByHours.length && attempts < 5000) {
+    attempts++;
+    // sqrt 분포로 annulus 균등 샘플링
+    const r2 = SUN_CLEAR * SUN_CLEAR + rand() * (MAX_R * MAX_R - SUN_CLEAR * SUN_CLEAR);
+    const r  = Math.sqrt(r2);
+    const a  = rand() * Math.PI * 2;
+    const x  = r * Math.cos(a);
+    const y  = r * Math.sin(a);
+    // 기존 별과 최소 거리 확인
+    let ok = true;
+    for (const p of positions) {
+      const dx = x - p.x, dy = y - p.y;
+      if (dx * dx + dy * dy < MIN_DIST * MIN_DIST) { ok = false; break; }
+    }
+    if (ok) positions.push({ x, y });
+  }
+
+  // 안전장치: Poisson 실패 시 균등 링으로 폴백 (위치 모자랄 때만)
+  while (positions.length < sortedByHours.length) {
+    const i = positions.length;
+    const a = (i / sortedByHours.length) * Math.PI * 2 - Math.PI / 2;
+    positions.push({ x: 220 * Math.cos(a), y: 220 * Math.sin(a) });
+  }
+
+  const stars = sortedByHours.map((g, i) => ({
+    ...g,
+    x: positions[i].x,
+    y: positions[i].y,
+    origIdx: filled.indexOf(g)
+  }));
+
+  // Phase 2 — 별 크기: sqrt(시간) 비례, 가독성 위해 더 키움
+  const maxHours = Math.max(...filled.map(g => g.hours), 1);
+  const MIN_SIZE = 7, MAX_SIZE = 26;
+  stars.forEach(s => {
+    const norm = Math.sqrt(s.hours / maxHours);
+    s.size = MIN_SIZE + norm * (MAX_SIZE - MIN_SIZE);
+  });
+
+  // Phase 3 — 별자리 선: 가운데 "11 GENRES" 구체도 하나의 별로 취급
+  // 중심 별을 인덱스 0에 두고, 각 별은 "이미 그려진" 노드 중 가장 가까운 것에 연결
+  // → 결과: 중심 별이 자연스럽게 별자리의 허브 역할
+  const CENTER = { x: 0, y: 0 };
+  const allNodes = [CENTER, ...stars];
+  let lines = '';
+  for (let i = 1; i < allNodes.length; i++) {
+    let minD = Infinity, nearest = 0;
+    for (let j = 0; j < i; j++) {
+      const dx = allNodes[i].x - allNodes[j].x;
+      const dy = allNodes[i].y - allNodes[j].y;
+      const d = dx * dx + dy * dy;
+      if (d < minD) { minD = d; nearest = j; }
+    }
+    const a = allNodes[i], b = allNodes[nearest];
+    lines += `<line class="cnst-line"
+                     x1="${a.x.toFixed(2)}" y1="${a.y.toFixed(2)}"
+                     x2="${b.x.toFixed(2)}" y2="${b.y.toFixed(2)}"
+                     stroke="var(--c-cyan-2)" stroke-width="1.5"
+                     opacity="0.75" stroke-linecap="round" />`;
+  }
+
+  // Phase 4 — 별 렌더 (halo + core + bright center)
+  let starsSvg = '';
+  stars.forEach((s, i) => {
+    const color = DONUT_PALETTE[s.origIdx % DONUT_PALETTE.length];
+    const safeId = escapeAttr(s.id);
+    starsSvg += `
+      <g class="ov-donut-seg cnst-star"
+         data-genre-id="${safeId}"
+         data-name="${escapeAttr(s.name)}"
+         data-hours="${s.hours}"
+         data-pct="${s.pct.toFixed(1)}"
+         data-color="${color}">
+        <circle cx="${s.x.toFixed(2)}" cy="${s.y.toFixed(2)}" r="${(s.size * 2.8).toFixed(2)}"
+                fill="${color}" opacity="0.18" class="cnst-halo" />
+        <circle cx="${s.x.toFixed(2)}" cy="${s.y.toFixed(2)}" r="${s.size.toFixed(2)}"
+                fill="${color}" opacity="0.92" class="cnst-core" />
+        <circle cx="${s.x.toFixed(2)}" cy="${s.y.toFixed(2)}" r="${(s.size * 0.45).toFixed(2)}"
+                fill="#fff" opacity="0.98" class="cnst-flare" />
       </g>
     `;
   });
-  segPaths += labelEls;
+
+  // Phase 5 — 배경 우주 먼지 (deterministic, 더 큰 캔버스에 맞춰 더 멀리까지)
+  let dust = '';
+  for (let i = 0; i < 140; i++) {
+    const a = ((i * 137.5) % 360) * Math.PI / 180;
+    const r = 30 + ((i * 17.3) % 240);
+    const x = r * Math.cos(a);
+    const y = r * Math.sin(a);
+    const sz = 0.4 + ((i * 7) % 9) * 0.13;
+    const op = 0.16 + ((i * 11) % 30) * 0.012;
+    dust += `<circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="${sz.toFixed(2)}"
+                     fill="#fff" opacity="${op.toFixed(2)}" />`;
+  }
 
   return `
     <div class="overview-card">
@@ -363,10 +425,140 @@ function renderOverviewCard(sortedGenres, stats) {
       </div>
       <div class="ov-right">
         <div class="ov-donut-wrap">
-          <svg class="ov-donut-svg" viewBox="-200 -160 400 320" aria-label="장르별 시간 분포">
-            <g class="ov-donut-segments">
-              ${segPaths || `<circle r="${rOuter}" fill="${'var(--c-bg-2)'}" /><circle r="${rInner}" fill="${'var(--c-bg)'}" />`}
+          <svg class="ov-donut-svg" viewBox="-310 -310 620 620" aria-label="장르별 별자리">
+            <g class="cnst-dust">${dust}</g>
+            <g class="cnst-lines">${lines}</g>
+            <g class="cnst-stars">${starsSvg}</g>
+            <g class="cnst-center-star">
+              <circle cx="0" cy="0" r="48" fill="var(--c-cyan)" opacity="0.10" />
+              <circle cx="0" cy="0" r="34" fill="var(--c-cyan)" opacity="0.16" />
+              <circle cx="0" cy="0" r="3"  fill="#fff"        opacity="0.95" />
             </g>
+          </svg>
+          <div class="ov-donut-center cnst-center">
+            <div class="ov-donut-center-default">
+              <div class="ov-donut-center-num">${App.data.genres.length}</div>
+              <div class="ov-donut-center-label">GENRES</div>
+            </div>
+            <div class="ov-donut-center-active">
+              <div class="ov-donut-center-name"></div>
+              <div class="ov-donut-center-hours"></div>
+              <div class="ov-donut-center-pct"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ── (deprecated) 듀얼 링 틱 마크 — 별자리로 교체됨 ──
+function _unused_buildTickRing(filled, stats) {
+  const buildTickRing = (totalTicks, rIn, rOut, strokeWidth, metric, total) => {
+    let svg = '';
+    let cumTicks = 0;
+    // 1차 분배: 비율대로 (최소 2틱 보장)
+    const allocations = filled.map(g => Math.max(2, Math.round((g[metric] / total) * totalTicks)));
+    // 합이 totalTicks 넘으면 큰 것에서 빼기, 부족하면 추가
+    let sum = allocations.reduce((a, b) => a + b, 0);
+    while (sum > totalTicks) {
+      const idx = allocations.indexOf(Math.max(...allocations));
+      if (allocations[idx] > 2) { allocations[idx]--; sum--; } else break;
+    }
+    while (sum < totalTicks) {
+      const idx = allocations.indexOf(Math.max(...allocations));
+      allocations[idx]++; sum++;
+    }
+
+    filled.forEach((g, gi) => {
+      const numTicks = allocations[gi];
+      const color = DONUT_PALETTE[gi % DONUT_PALETTE.length];
+      const safeId = escapeAttr(g.id);
+      let groupSvg = '';
+
+      for (let t = 0; t < numTicks; t++) {
+        // 갭 1틱 효과: 마지막 틱은 그리지 않음 (다음 장르와 시각적 분리)
+        if (t === numTicks - 1 && numTicks > 2) continue;
+        const angle = ((cumTicks + t) / totalTicks) * 360 - 90;
+        const rad = angle * Math.PI / 180;
+        const cos = Math.cos(rad), sin = Math.sin(rad);
+        const x1 = rIn * cos,  y1 = rIn * sin;
+        const x2 = rOut * cos, y2 = rOut * sin;
+        groupSvg += `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}"
+                            x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}"
+                            stroke="${color}" stroke-width="${strokeWidth}"
+                            stroke-linecap="round" />`;
+      }
+
+      svg += `<g class="ov-donut-seg rb-tick-group"
+                 data-genre-id="${safeId}"
+                 data-name="${escapeAttr(g.name)}"
+                 data-hours="${g.hours}"
+                 data-pct="${g.pct.toFixed(1)}"
+                 data-color="${color}">
+                ${groupSvg}
+              </g>`;
+      cumTicks += numTicks;
+    });
+
+    return svg;
+  };
+
+  const outerRing = buildTickRing(120, 122, 152, 2.4, 'hours', stats.totalHours);
+  const innerRing = buildTickRing(80,   82, 105, 2.0, 'count', stats.totalGames);
+
+  // ── 천문도/나침반 스타일 장식 ──
+  // 1) 외부 큰 외곽 링 (얇은 골드)
+  // 2) 12 시 위치에 작은 dial marks (시계처럼)
+  // 3) 4 cardinal (12/3/6/9) 위치에 큰 marks
+  // 4) 안쪽에 동심원 한 줄 더 (이중 테두리 느낌)
+  const decorMarks = (() => {
+    let svg = '';
+    const R_OUTER_RING = 168;
+    const TICK_INNER = 161;
+    const CARDINAL_INNER = 156;
+    for (let i = 0; i < 24; i++) {
+      const angle = (i / 24) * 360 - 90;
+      const rad = angle * Math.PI / 180;
+      const cos = Math.cos(rad), sin = Math.sin(rad);
+      const isCardinal = i % 6 === 0;
+      const innerR = isCardinal ? CARDINAL_INNER : TICK_INNER;
+      svg += `<line x1="${(innerR * cos).toFixed(2)}" y1="${(innerR * sin).toFixed(2)}"
+                    x2="${(R_OUTER_RING * cos).toFixed(2)}" y2="${(R_OUTER_RING * sin).toFixed(2)}"
+                    stroke="var(--c-cyan)" stroke-width="${isCardinal ? 1.6 : 0.8}"
+                    opacity="${isCardinal ? 0.55 : 0.32}" stroke-linecap="round" />`;
+    }
+    return svg;
+  })();
+
+  const guideRings = `
+    <circle r="170" fill="none" stroke="var(--c-cyan)" stroke-width="0.7" opacity="0.32" />
+    <circle r="159" fill="none" stroke="var(--c-cyan)" stroke-width="0.4" opacity="0.18" />
+    <circle r="115" fill="none" stroke="var(--c-cyan)" stroke-width="0.4" opacity="0.18" stroke-dasharray="1 4" />
+    <circle r="76"  fill="none" stroke="var(--c-cyan)" stroke-width="0.5" opacity="0.25" />
+    <circle r="62"  fill="none" stroke="var(--c-cyan)" stroke-width="0.4" opacity="0.18" />
+    ${decorMarks}
+  `;
+
+  return `
+    <div class="overview-card">
+      <div class="ov-left">
+        <div class="ov-stat">
+          <div class="ov-stat-num">${stats.totalGames}</div>
+          <div class="ov-stat-label">TOTAL GAMES</div>
+        </div>
+        <div class="ov-stat-hr"></div>
+        <div class="ov-stat">
+          <div class="ov-stat-num">${stats.totalHours.toLocaleString()}<span class="plus">+</span></div>
+          <div class="ov-stat-label">PLAY HOURS</div>
+        </div>
+      </div>
+      <div class="ov-right">
+        <div class="ov-donut-wrap">
+          <svg class="ov-donut-svg" viewBox="-180 -180 360 360" aria-label="장르별 시간·게임 수 분포">
+            <g class="rb-guides">${guideRings}</g>
+            <g class="rb-ring rb-ring-outer">${outerRing}</g>
+            <g class="rb-ring rb-ring-inner">${innerRing}</g>
           </svg>
           <div class="ov-donut-center">
             <div class="ov-donut-center-default">
