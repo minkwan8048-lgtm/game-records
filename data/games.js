@@ -126,12 +126,12 @@ window.GAMES_DATA = {
       "genre": "strategy",
       "hours": 3000,
       "hoursDisplay": "3,000+ 시간",
-      "tier": "마스터",
-      "tierBadge": "MASTER",
+      "tier": "그랜드마스터",
+      "tierBadge": "GRANDMASTER",
       "season": "",
       "position": "",
       "shortDesc": "빌드 설계가 전투를 결정 — 시너지·아이템·확률의 시스템적 조합을 한 화면에서 본 게임",
-      "bgImage": "assets/games/tft_master.png",
+      "bgImage": "assets/games/tft_grandmaster.png",
       "bgGradient": [
         "#5B3FB8",
         "#15113A"
