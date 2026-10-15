@@ -2,24 +2,74 @@
   "user": {
     "name": "서민관",
     "title": "GAME RECORDS",
-    "tagline": "MASTER TIER · 22,000+ HOURS · ACROSS GENRES",
+    "tagline": "GRANDMASTER TIER · 22,000+ HOURS · ACROSS GENRES",
     "email": "minkwan8048@gmail.com",
-    "lastUpdated": "2026-05-05"
+    "lastUpdated": "2026-10-15"
   },
   "genres": [
-    {"id": "moba",             "name": "MOBA",                 "description": "다인 협동 PvP 전투"},
-    {"id": "fps",              "name": "FPS · TPS",            "description": "1·3인칭 슈터"},
-    {"id": "rpg",              "name": "MMORPG",               "description": "캐릭터 성장 · 세계관"},
-    {"id": "action-adventure", "name": "액션 · 어드벤처",      "description": "싱글 플레이 액션"},
-    {"id": "roguelite",        "name": "로그라이트 · 인디",    "description": "반복 플레이 · 인디"},
-    {"id": "strategy",         "name": "전략",                 "description": "실시간 · 턴제"},
-    {"id": "simulation",       "name": "시뮬레이션",           "description": "건설 · 경영 · 인생"},
-    {"id": "survival",         "name": "서바이벌",             "description": "서바이벌 · 배틀로얄 · 샌드박스"},
-    {"id": "subculture",       "name": "서브컬쳐",             "description": "수집형 RPG · 모바일 가챠"},
-    {"id": "sports-fighting",  "name": "스포츠 · 격투",        "description": "스포츠 · 1대1 격투"},
-    {"id": "etc",              "name": "기타",                 "description": "카드 · 리듬 · 퍼즐 등"}
+    {
+      "id": "moba",
+      "name": "MOBA",
+      "description": "다인 협동 PvP 전투"
+    },
+    {
+      "id": "fps",
+      "name": "FPS · TPS",
+      "description": "1·3인칭 슈터"
+    },
+    {
+      "id": "rpg",
+      "name": "MMORPG",
+      "description": "캐릭터 성장 · 세계관"
+    },
+    {
+      "id": "action-adventure",
+      "name": "액션 · 어드벤처",
+      "description": "싱글 플레이 액션"
+    },
+    {
+      "id": "roguelite",
+      "name": "로그라이트 · 인디",
+      "description": "반복 플레이 · 인디"
+    },
+    {
+      "id": "strategy",
+      "name": "전략",
+      "description": "실시간 · 턴제"
+    },
+    {
+      "id": "simulation",
+      "name": "시뮬레이션",
+      "description": "건설 · 경영 · 인생"
+    },
+    {
+      "id": "survival",
+      "name": "서바이벌",
+      "description": "서바이벌 · 배틀로얄 · 샌드박스"
+    },
+    {
+      "id": "subculture",
+      "name": "서브컬쳐",
+      "description": "수집형 RPG · 모바일 가챠"
+    },
+    {
+      "id": "sports-fighting",
+      "name": "스포츠 · 격투",
+      "description": "스포츠 · 1대1 격투"
+    },
+    {
+      "id": "etc",
+      "name": "기타",
+      "description": "카드 · 리듬 · 퍼즐 등"
+    }
   ],
-  "majorRecords": ["lol", "tft", "valorant", "overwatch", "pubg"],
+  "majorRecords": [
+    "tft",
+    "lol",
+    "valorant",
+    "overwatch",
+    "pubg"
+  ],
   "games": [
     {
       "id": "lol",
@@ -34,7 +84,31 @@
       "position": "",
       "shortDesc": "전투 기획의 토대 — 챔피언·아이템·룬이 얽힌 시너지와 카운터 구조를 가장 깊이 학습한 게임",
       "bgImage": "assets/games/lol_master_new.png",
-      "bgGradient": ["#785A28", "#0A1428"],
+      "bgGradient": [
+        "#785A28",
+        "#0A1428"
+      ],
+      "thumbnail": "",
+      "screenshots": [],
+      "comment": "(코멘트 작성 예정)"
+    },
+    {
+      "id": "tft",
+      "name": "전략적 팀 전투",
+      "nameEn": "Teamfight Tactics",
+      "genre": "strategy",
+      "hours": 5000,
+      "hoursDisplay": "5,000+ 시간",
+      "tier": "그랜드마스터",
+      "tierBadge": "GRANDMASTER",
+      "season": "",
+      "position": "",
+      "shortDesc": "빌드 설계가 전투를 결정 — 시너지·아이템·확률의 시스템적 조합을 한 화면에서 본 게임",
+      "bgImage": "assets/games/tft_grandmaster.png",
+      "bgGradient": [
+        "#5B3FB8",
+        "#15113A"
+      ],
       "thumbnail": "",
       "screenshots": [],
       "comment": "(코멘트 작성 예정)"
@@ -52,25 +126,10 @@
       "position": "",
       "shortDesc": "역할 카운터·영웅 스왑이 매 순간 작동 — 시스템 간 유기적 연결의 실시간 사례",
       "bgImage": "assets/icons/overwatch_master_ow1.png",
-      "bgGradient": ["#C66D1B", "#1A2A3A"],
-      "thumbnail": "",
-      "screenshots": [],
-      "comment": "(코멘트 작성 예정)"
-    },
-    {
-      "id": "tft",
-      "name": "전략적 팀 전투",
-      "nameEn": "Teamfight Tactics",
-      "genre": "strategy",
-      "hours": 3000,
-      "hoursDisplay": "3,000+ 시간",
-      "tier": "그랜드마스터",
-      "tierBadge": "GRANDMASTER",
-      "season": "",
-      "position": "",
-      "shortDesc": "빌드 설계가 전투를 결정 — 시너지·아이템·확률의 시스템적 조합을 한 화면에서 본 게임",
-      "bgImage": "assets/games/tft_grandmaster.png",
-      "bgGradient": ["#5B3FB8", "#15113A"],
+      "bgGradient": [
+        "#C66D1B",
+        "#1A2A3A"
+      ],
       "thumbnail": "",
       "screenshots": [],
       "comment": "(코멘트 작성 예정)"
@@ -88,7 +147,10 @@
       "position": "",
       "shortDesc": "시야·자원·시간 압박이 동시에 작동하는 서바이벌 — 즉발적 의사결정의 무게를 학습",
       "bgImage": "assets/icons/pubg_top500.png",
-      "bgGradient": ["#B07A0E", "#1F1F1F"],
+      "bgGradient": [
+        "#B07A0E",
+        "#1F1F1F"
+      ],
       "thumbnail": "",
       "screenshots": [],
       "comment": "(코멘트 작성 예정)"
@@ -124,7 +186,10 @@
       "position": "",
       "shortDesc": "각 역할군에 따른 전투 설계 — 역할군의 부재에서 오는 전략의 엇갈림을 학습한 전술 슈터",
       "bgImage": "assets/icons/valorant_ascendant.png",
-      "bgGradient": ["#BD3944", "#0F1923"],
+      "bgGradient": [
+        "#BD3944",
+        "#0F1923"
+      ],
       "thumbnail": "",
       "screenshots": [],
       "comment": "(코멘트 작성 예정)"

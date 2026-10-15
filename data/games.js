@@ -8,9 +8,9 @@ window.GAMES_DATA = {
   "user": {
     "name": "서민관",
     "title": "GAME RECORDS",
-    "tagline": "MASTER TIER · 22,000+ HOURS · ACROSS GENRES",
+    "tagline": "GRANDMASTER TIER · 22,000+ HOURS · ACROSS GENRES",
     "email": "minkwan8048@gmail.com",
-    "lastUpdated": "2026-05-05"
+    "lastUpdated": "2026-10-15"
   },
   "genres": [
     {
@@ -70,8 +70,8 @@ window.GAMES_DATA = {
     }
   ],
   "majorRecords": [
-    "lol",
     "tft",
+    "lol",
     "valorant",
     "overwatch",
     "pubg"
@@ -99,6 +99,27 @@ window.GAMES_DATA = {
       "comment": "(코멘트 작성 예정)"
     },
     {
+      "id": "tft",
+      "name": "전략적 팀 전투",
+      "nameEn": "Teamfight Tactics",
+      "genre": "strategy",
+      "hours": 5000,
+      "hoursDisplay": "5,000+ 시간",
+      "tier": "그랜드마스터",
+      "tierBadge": "GRANDMASTER",
+      "season": "",
+      "position": "",
+      "shortDesc": "빌드 설계가 전투를 결정 — 시너지·아이템·확률의 시스템적 조합을 한 화면에서 본 게임",
+      "bgImage": "assets/games/tft_grandmaster.png",
+      "bgGradient": [
+        "#5B3FB8",
+        "#15113A"
+      ],
+      "thumbnail": "",
+      "screenshots": [],
+      "comment": "(코멘트 작성 예정)"
+    },
+    {
       "id": "overwatch",
       "name": "오버워치",
       "nameEn": "Overwatch",
@@ -114,27 +135,6 @@ window.GAMES_DATA = {
       "bgGradient": [
         "#C66D1B",
         "#1A2A3A"
-      ],
-      "thumbnail": "",
-      "screenshots": [],
-      "comment": "(코멘트 작성 예정)"
-    },
-    {
-      "id": "tft",
-      "name": "전략적 팀 전투",
-      "nameEn": "Teamfight Tactics",
-      "genre": "strategy",
-      "hours": 3000,
-      "hoursDisplay": "3,000+ 시간",
-      "tier": "그랜드마스터",
-      "tierBadge": "GRANDMASTER",
-      "season": "",
-      "position": "",
-      "shortDesc": "빌드 설계가 전투를 결정 — 시너지·아이템·확률의 시스템적 조합을 한 화면에서 본 게임",
-      "bgImage": "assets/games/tft_grandmaster.png",
-      "bgGradient": [
-        "#5B3FB8",
-        "#15113A"
       ],
       "thumbnail": "",
       "screenshots": [],
