@@ -8,7 +8,7 @@ window.GAMES_DATA = {
   "user": {
     "name": "서민관",
     "title": "GAME RECORDS",
-    "tagline": "GRANDMASTER TIER · 22,000+ HOURS · ACROSS GENRES",
+    "tagline": "GRANDMASTER TIER · 24,000+ HOURS · ACROSS GENRES",
     "email": "minkwan8048@gmail.com",
     "lastUpdated": "2026-10-15"
   },
